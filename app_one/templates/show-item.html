@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+ <div class="container mt-5">
+    <div class="row">
+            <h5 class="p-2">{{item.item}}</h5>    
+    </div>
+    
+    
+      <ul class="list-group list-group-flush w-25 mt-5">
+       <h4>Users who added this item :</h4> 
+       {% for item in item.userId.all %}
+        <li class="list-group-item">  {{ item.name }} </li>
+       {% endfor %}
+    
+      </ul>
+ </div>
+
+{% endblock %}          

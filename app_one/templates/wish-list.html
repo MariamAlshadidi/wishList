@@ -1,0 +1,102 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if messages %}
+<ul class="messages">    
+    {% for message in messages %}    
+        <li {% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</li>    
+{% endfor %}
+</ul>
+ {% endif %} 
+
+<div class="container mt-5">
+ <div class="row mt-5">
+    
+    <div class="d-flex justify-content-between">
+        <div class="heloo">
+            <h3 class=" mb-1 title">Heloo {{ user.name }}</h3>
+            <h6 class=" sup-title mb-5">Let's create your wishlist !</h6> 
+        </div>
+
+        <h5><a href="{% url 'addWish'  %}" class="btn btn-warning">Add item</a></h5>
+    </div>
+
+        <h5 class="  mt-5">Your wish list</h5>
+       
+
+    <div class="col-8 text-center table-item">
+        <table class="table table-bordered border-light ms-5 table-striped ">
+            <thead>
+                <tr>
+                    <th scope="col">Item</th>
+                    <th scope="col">Added by</th>
+                    <th scope="col">Date Added</th>
+                    <th colspan="2">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+               {% for i in user.userNames.all %} 
+                 
+                    <tr>
+                        <td><a href="{% url 'showItem' itemId=i.id %}">{{i.item}}</a></td>  
+                        <td>{{ i.user_name.name}}</td>
+                        <td>{{ i.created_at }}</td>
+                        <td><a href="{% url 'delteItem' ItemId=i.id %}">Delete</a> | <a href="{% url 'removeItem' ItemId=i.id %}">Remove</a></td> 
+                    </tr>
+
+                {% endfor %} 
+                {% for i in user.itemwish.all %} 
+                 
+                    <tr>
+                        <td><a href="{% url 'showItem' itemId=i.id %}">{{i.item}}</a></td>  
+                        <td>{{ i.user_name.name}}</td>
+                        <td>{{ i.created_at }}</td>
+                        <td><a href="{% url 'delteItem' ItemId=i.id %}">Delete</a> | <a href="{% url 'removeItem' ItemId=i.id %}">Remove</a></td> 
+                    </tr>
+
+                {% endfor %} 
+                
+            </tbody>
+        </table>
+         </div>
+ </div>
+
+
+ <div class="row mt-5">
+    <div class="col-8 table-item">
+        <h5>other user's wish list</h5>
+        <table class="table table-bordered border-light ms-5 table-striped text-center" >
+            <thead>
+                <tr>
+                    <th scope="col">Item</th>
+                    <th scope="col">Added by</th>
+                    <th scope="col">Date Added</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in items %}  
+                    <tr>
+                        <td><a href="{% url 'showItem' itemId=i.id %}">{{i.item}}</a></td>  
+                        <td>{{ i.user_name.name }}</td>
+                        <td>{{ i.created_at }}</td>
+                        <td><a href="{% url 'addListToUser' ItemId=i.id %}">Add to my wishlist</a></td>  
+                    </tr>
+
+                {% endfor %} 
+            </tbody>
+        </table>
+         </div>
+
+      
+         
+ </div>
+
+</div>
+
+
+
+
+ {% endblock %}            

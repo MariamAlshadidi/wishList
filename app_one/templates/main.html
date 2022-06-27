@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container ">
+    <div class="auth">
+        <div class="row">
+            {% if messages %}
+            <ul class="messages">    
+                {% for message in messages %}    
+                    <li {% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</li>    
+            {% endfor %}
+            </ul>
+             {% endif %} 
+             <h1>Welcome !</h1>
+            <div class="col-6">
+
+                <div class="register">
+                    <h3>Register</h3>
+                    <form method="post" action="/register" class="needs-validation" novalidate>
+                        
+                        <div class="mb-5">
+                            <label class="form-label">Name</label>
+                            <input class="form-control" type="text" name="name" required>
+
+                        </div>
+                
+                        <div class="mb-5">
+                            <label class="form-label">userName</label>
+                            <input class="form-control" type="text" name="username" required >
+                        </div>
+                
+                        <div class="mb-5">
+                            <label class="form-label">Password</label>
+                            <input class="form-control" type="password" name="password" required>
+                        </div>
+    
+                        <div class="mb-5">
+                            <label class="form-label">Confirem Password</label>
+                            <input class="form-control" type="password" name="confirem-password" required>
+                        </div>
+
+                        <div class="mb-5">
+                            <label class="form-label">Date Hired</label>
+                            <input class="form-control" type="date" name="data_hired" required>
+                        </div>
+    
+                
+                        {% csrf_token %}
+                        <input type="submit" value="Register" class="btn btn-primary">
+                    </form>
+                </div>
+            
+            </div>
+    
+            <div class="col-6">
+                <div class="login">
+                    <h3>Login</h3>
+                    <form method="post" action="/login" class="needs-validation" novalidate>
+                        
+                        <div class="mb-5">
+                            <label class="form-label">userName</label>
+                            <input  class="form-control" type="text" name="username" required>
+                        </div>
+           
+                        
+                        <div class="mb-5">
+                            <label class="form-label">Password</label>
+                            <input class="form-control" type="password" name="password" required>
+                        </div>
+                
+                        {% csrf_token %}
+                        <input type="submit" value="Login" class="btn btn-primary">
+                    </form>
+                </div>
+            
+            </div>   
+        </div>   
+    </div>   
+</div>
+
+
+
+
+{% endblock %}
+

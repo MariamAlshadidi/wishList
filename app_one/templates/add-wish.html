@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if messages %}
+<ul class="messages">    
+    {% for message in messages %}    
+        <li {% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</li>    
+{% endfor %}
+</ul>
+ {% endif %} 
+ 
+ <div class="container mt-5">
+
+        <h3>Create a new wish list item</h3>
+ 
+    
+
+    <div class="create-dojo box">
+        <form method="post" action="/wish_item/create">
+    
+            <div class="mb-3">
+                <label for="item" class="form-label">item/product</label>
+                <input type="text" name="item" class="form-control"  aria-describedby="emailHelp">
+            </div>
+            <input type="hidden" name="user.name" value="{{ user.name }}">
+
+            {% csrf_token %}
+            <button type="submit" class="btn btn-warning add btn-add">Add</button>
+        </form>
+    
+    </div>
+    
+ </div>
+
+{% endblock %}
